@@ -1,0 +1,13 @@
+---
+
+- name: Install memcached
+  yum: name=memcached enablerepo=remi
+  tags:
+    - memcached
+    - lamp
+
+- name: Start memcached
+  service: name=memcached state=started
+  tags:
+    - memcached
+    - lamp

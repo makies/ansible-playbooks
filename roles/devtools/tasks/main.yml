@@ -1,0 +1,8 @@
+---
+
+  - include: ssh.yml
+  - include: app.yml
+  - include: vim.yml
+  - include: dotfiles.yml
+  - include: nodejs.yml
+

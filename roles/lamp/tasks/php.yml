@@ -1,0 +1,53 @@
+---
+
+- name: Install php
+  yum: name=$item enablerepo=remi state=present
+  with_items:
+    - php
+    - php-cli
+    - php-common
+    - php-mbstring
+    - php-pdo
+    - php-mysql
+    - php-pear
+    - php-pecl-xdebug
+    - php-pecl-memcached
+    - php-pecl-apc
+    - php-pecl-xhprof
+    - php-process
+    - php-xml
+    - xhprof      # php-pecl-xhprofだけだとwebから見れるようにしてくれない
+  tags:
+    - php
+    - lamp
+
+- name: add Timezone
+  action: lineinfile dest=/etc/php.ini regexp='^;date.timezone =' line='date.timezone = Asia/Tokyo'
+  tags:
+    - php
+    - lamp
+
+- name: Copy info.php to DocumentRoot
+  copy: src=info.php dest={{ document_root }}/info.php owner={{ user_name }} group={{ user_name }} mode=0644 backup=no
+  tags:
+  - php
+  - apache
+  - lamp
+
+
+- name: Install composer.phar
+  sudo: no
+  action: shell curl -sS  https://getcomposer.org/installer|php creates=/home/{{ user_name }}/composer.phar
+  tags:
+    - composer
+    - php
+    - lamp
+
+- name: Update composer.phar
+  sudo: no
+  action: shell /home/{{ user_name }}/composer.phar self-update
+  tags:
+    - composer
+    - php
+    - lamp
+

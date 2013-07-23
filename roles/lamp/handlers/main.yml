@@ -1,0 +1,10 @@
+---
+# ハンドラ
+
+# Apache 再起動
+- name: restart httpd
+  service: name=httpd state=restarted
+
+# MySQL 再起動
+- name: restart mysqld
+  service: name=mysqld state=restarted

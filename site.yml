@@ -1,0 +1,13 @@
+---
+# 開発環境のセットアップ
+
+- hosts: dev
+  user: vagrant
+  sudo: yes
+  vars_files:
+    - group_vars/dev.yml
+
+  roles:
+    - devtools
+    - lamp
+    - jsapp

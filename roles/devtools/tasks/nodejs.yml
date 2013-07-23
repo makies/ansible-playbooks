@@ -1,0 +1,38 @@
+---
+
+- name: Install openssl
+  yum: pkg=openssl-devel state=installed
+  tags: nodejs
+
+
+- name: Download nodebrew
+  get_url: url=http://git.io/nodebrew dest=/usr/local/src/nodebrew
+  tags:
+    - nodebrew
+
+
+- name: Install nodebrew
+  sudo: no
+  command: perl nodebrew setup chdir=/usr/local/src creates=/home/{{ user_name }}/.nodebrew
+  tags:
+    - nodebrew
+
+
+- name: Add nodebrew to .bashrc
+  sudo: no
+  lineinfile: dest=/home/{{ user_name }}/.bashrc line="export PATH=$HOME/.nodebrew/current/bin:$PATH" regexp="" insertafter=EOF
+  tags:
+    - nodebrew
+
+
+- name: install npm-binary
+  sudo: no
+  command: /home/{{ user_name}}/.nodebrew/current/bin/nodebrew install-binary v{{ nodejs_version }} creates=/home/{{ user_name }}/.nodebrew/node/v{{ nodejs_version }}
+  tags:
+    - nodebrew
+
+# - name: Add nodebrew use version to .bashrc
+  # sudo: no
+  # lineinfile: dest=/home/{{ user_name }}/.bashrc line="nodebrew use v{{ nodejs_version }}" regexp="" insertafter="export PATH=$HOME/.nodebrew/current/bin:$PATH"
+  # tags:
+    # - nodebrew

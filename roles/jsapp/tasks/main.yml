@@ -1,0 +1,10 @@
+---
+# Javascript App
+
+- name: Create npm_app_dir
+  sudo: no
+  file: state=directory recurse=yes path={{ npm_app_dir }}
+  tags:
+      - npm_app
+
+- include: yeomen.yml

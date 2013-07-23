@@ -1,0 +1,29 @@
+---
+
+- name: Install apps
+  yum: name={{ item }} state=present
+  with_items:
+    - ctags
+    - vim
+    - vim-enhanced
+    - curl
+    - git
+    - subversion
+    - gettext
+    - make
+    - automake
+    - autoconf
+    - man
+    - unzip
+    - wget
+    - ntp
+    - tree
+  tags:
+    - tools
+
+
+
+- name: Install apps from epel
+  yum: name=libmcrypt enablerepo=epel state=present
+  tags:
+    - install_apps_from_epel

@@ -1,0 +1,42 @@
+---
+# Javascript App
+
+
+- name: Create my common npm modules dir
+  file: state=directory path={{ user_common_npm_dir }} owner={{ user_name }} group={{ user_name }} mode=0755 recurse=yes
+  tags:
+      - install_yeomen
+
+- name: use npm version
+  sudo: no
+  command: /home/{{ user_name }}/.nodebrew/current/bin/nodebrew use v{{ nodejs_version }} > /dev/null
+  tags:
+      - install_yeomen
+
+# Yeoman、Grunt、Bower
+- name: Install yeomen with npm for me
+  sudo: no
+  npm: name={{ item }} global=yes executable=/home/{{ user_name }}/.nodebrew/current/bin/npm path={{ user_common_npm_dir }}
+  with_items:
+      - yo
+      - less
+      - coffee-script
+  tags:
+      - install_yeomen
+
+# generators
+- name: Install yeomen generators
+  sudo: no
+  npm: name={{ item }} global=yes executable=/home/{{ user_name }}/.nodebrew/current/bin/npm path={{ user_common_npm_dir }}
+  with_items:
+  - generator-webapp
+  - generator-backbone
+  - generator-footguard
+  tags:
+    - install_yeomen
+
+- name: Add my_common_npm_dir to .bashrc
+  sudo: no
+  lineinfile: dest=/home/{{ user_name }}/.bashrc line="export PATH={{ user_common_npm_dir }}:$PATH" regexp="" insertafter=EOF
+  tags:
+    - install_yeomen

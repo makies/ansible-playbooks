@@ -1,0 +1,46 @@
+---
+# dotfiles を cloneしてシンボリックリンクを貼ったりする
+
+# - name: Clone my dotfiles from home server
+  # sudo: no
+  # git: repo=ssh://capi/export/git/dotfiles dest=/home/{{ user_name }}/dotfiles/
+  # register: dotfiles_installed
+  # tags:
+    # - dotfiles
+
+- name: Clone my dotfiles from bitbucket
+  sudo: no
+  git: repo=git@bitbucket.org:makies/dotfiles.git dest=/home/{{ user_name }}/dotfiles/
+  register: dotfiles_installed
+  tags:
+    - dotfiles
+
+- name: Initialize dotfiles submodule
+  sudo: no
+  shell: git submodule update --init chdir=/home/{{ user_name }}/dotfiles
+  tags:
+    - dotfiles
+
+- name: Create link to dotfiles .vim
+  sudo: no
+  file: state=link src=~/dotfiles/vimfiles dest=~/.vim
+  tags:
+    - dotfiles
+
+- name: Create link to dotfiles .vimrc
+  sudo: no
+  file: state=link src=~/dotfiles/_vimrc dest=~/.vimrc
+  tags:
+    - dotfiles
+
+- name: Create link to dotfiles .gitconfig
+  sudo: no
+  file: state=link src=~/dotfiles/_gitconfig dest=~/.gitconfig
+  tags:
+    - dotfiles
+
+- name: Create link to dotfiles .tmux.conf
+  sudo: no
+  file: state=link src=~/dotfiles/_tmux.conf dest=~/.tmux.conf
+  tags:
+    - dotfiles

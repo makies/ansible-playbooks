@@ -1,0 +1,1 @@
+document_root: /home/{{ user_name }}/html

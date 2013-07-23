@@ -1,0 +1,23 @@
+---
+# mysqld関連設定
+
+- name: Install mysqld
+  yum: name=$item enablerepo=remi state=present
+  with_items:
+    - mysql
+    - mysql-server
+  tags:
+    - mysql
+    - lamp
+
+# - name: Copy my.cnf
+  # template: src=my.cnf.j2 dest=/etc/my.cnf owner=root group=root mode=0644 backup=yes
+  # notify:
+  # - restart mysqld
+
+- name: Start mysqld
+  service: name=mysqld state=started enabled=yes
+  tags:
+    - mysql
+    - lamp
+

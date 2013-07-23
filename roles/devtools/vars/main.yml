@@ -1,0 +1,6 @@
+---
+
+# Node.js
+nodejs_version: 0.10.13
+npm_app_dir: /home/vagrant/tmp/jsapp/
+user_common_npm_dir: /home/vagrant/bin/npm/

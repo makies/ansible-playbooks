@@ -1,0 +1,34 @@
+---
+
+- name: be sure vim is installed
+  yum: pkg=vim state=installed
+  tags: vim
+
+
+
+
+###
+# 以下うまく行ってないのでコメントアウト中
+###
+# - name: vim NeobundleInstall
+  # sudo: no
+  # # shell: git submodule update --init && vim -c NeoBundleInstall -c qa chdir=/home/{{ user_name }}/dotfiles/vimfiles
+  # shell: vim -c NeoBundleInstall
+  # # when: vimfiles_installed.changed
+  # tags:
+    # - install_vimfiles
+
+# - name: vim vimproc
+  # sudo: no
+  # # shell: git submodule update --init && vim -c NeoBundleInstall -c qa chdir=/home/{{ user_name }}/dotfiles/vimfiles
+  # shell: make -f  --init chdir=/home/{{ user_name }}/dotfiles/vimfiles/bundle/vimproc
+  # # when: vimfiles_installed.changed
+  # tags:
+    # - install_vimfiles
+
+# - name: Initialize vim-proc
+  # sudo: no
+  # shell: git submodule update --init && vim -c BundleInstall -c qa chdir=/home/{{ user_name }}/dotfiles/
+  # when: vimfiles_installed.changed
+  # tags:
+    # - install_vimfiles

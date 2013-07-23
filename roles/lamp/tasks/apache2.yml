@@ -1,0 +1,39 @@
+---
+
+- name: Install Apache
+  yum: pkg=httpd
+
+- name: chmod user home Directory
+  file: dest=/home/{{ user_name }} owner={{ user_name }} group={{ user_name }} mode=0711 state=directory
+  tags:
+  - apache
+  - lamp
+
+- name: Create DocumentRoot Directory
+  file: dest={{ document_root }} owner={{ user_name }} group={{ user_name }} mode=0755 state=directory
+  tags:
+  - apache
+  - lamp
+
+
+- name: Copy httpd.conf
+  template: src=vagrant_httpd.conf.j2 dest=/etc/httpd/conf.d/httpd.conf owner=root group=root mode=0644 backup=yes
+  notify:
+  - restart httpd
+  tags:
+  - apache
+  - lamp
+
+
+- name: Disable Default DocumentRoot
+  lineinfile: dest=/etc/httpd/conf/httpd.conf regexp='^DocumentRoot' line='#DocumentRoot "/var/www/html"' backup=yes
+  tags:
+  - apache
+  - lamp
+
+# Example action to start service httpd, if not running
+- name: Start httpd
+  service: name=httpd state=started
+  tags:
+    - apache
+    - lamp

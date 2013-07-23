@@ -1,0 +1,8 @@
+---
+# LAMP環境を作るPlaybook
+
+  - include: apache2.yml      # Apache2
+  - include: mysql.yml      # MySQL
+  - include: php.yml        # PHP
+  - include: memcached.yml  # Memcached
+

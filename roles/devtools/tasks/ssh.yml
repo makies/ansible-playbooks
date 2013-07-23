@@ -1,0 +1,14 @@
+---
+
+- name: Copy ssh/config
+  sudo: no
+  template: src=ssh_config.j2 dest=/home/{{ user_name }}/.ssh/config backup=yes mode=0600
+  tags: ssh_config
+
+
+- name: Copy ssh/id_rsa
+  sudo: no
+  template: src=~/.ssh/id_rsa dest=/home/{{ user_name }}/.ssh/id_rsa mode=0600
+  tags: ssh_config
+
+
