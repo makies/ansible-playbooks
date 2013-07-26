@@ -4,6 +4,20 @@
 
 - CentOS 6.x
 
+
+## Ansible
+
+-k で ユーザ(vagrant)のパスワードを聞かれるので入力する
+
+### vagrant 経由ではなく直接実行する場合
+
+    $ ansible-playbook -i ansible_hosts site.yml -u vagrant -k
+
+### タグ指定する場合（playbookの一部だけ実行したい場合）
+
+    $ ansible-playbook -i ansible_hosts site.yml -u vagrant -k --tags タグ名
+
+
 ## Vagrant
 
 Vagrant から利用する場合の設定
