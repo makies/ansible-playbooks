@@ -30,8 +30,8 @@ Vagrantfile の記述
 
     # provision設定
     config.vm.provision :ansible do |ansible|
-        ansible.playbook = "/path/to/makies-playbooks/site.yml"
-        ansible.inventory_file = "/path/to/makies-playbooks/ansible_hosts"
+        ansible.playbook = "/path/to/ansible-playbooks/site.yml"
+        ansible.inventory_file = "/path/to/ansible-playbooks/ansible_hosts"
     end
 
 プライベートネットワークで指定したIPアドレスを ansible_hosts に記述する
