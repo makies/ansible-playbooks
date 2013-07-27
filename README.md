@@ -93,7 +93,7 @@ Vagrantfile の記述
 - Node.js
   - パス等の設定を.bashrcに書き込む
 - .ssh/config
-  - no をやめたい
+  - StrictHostKeyChecking no をやめたい
 
 
 
