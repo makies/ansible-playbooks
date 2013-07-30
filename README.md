@@ -7,15 +7,16 @@
 
 ## Ansible
 
--k で ユーザ(vagrant)のパスワードを聞かれるので入力する
-
 ### vagrant 経由ではなく直接実行する場合
 
-    $ ansible-playbook -i ansible_hosts site.yml -u vagrant -k
+    $ ansible-playbook -i ansible_hosts site.yml -u vagrant --private-key=~/.vagrant.d/insecure_private_key
 
 ### タグ指定する場合（playbookの一部だけ実行したい場合）
 
-    $ ansible-playbook -i ansible_hosts site.yml -u vagrant -k --tags タグ名
+    $ ansible-playbook -i ansible_hosts site.yml -u vagrant --private-key=~/.vagrant.d/insecure_private_key --tags タグ名
+
+※ `~/.vagrant.d/insecure_private_key` は Vagrant 利用時に生成される鍵認証の秘密鍵ファイル。  
+Vagrant を使わない場合は別途鍵を用意するか、 `-k` オプションを付けてsshのパスワードを入力する。
 
 
 ## Vagrant
