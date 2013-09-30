@@ -1,3 +1,11 @@
 # DocumentRoot
 
 DocumentRoot "{{ document_root }}"
+
+<directory "{{ document_root }}">
+  AllowOverride All
+  Options Indexes MultiViews ExecCGI
+  Options +SymLinksIfOwnerMatch
+  allow from all
+</directory>
+
